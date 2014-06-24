@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 		tView = (TextView) findViewById(R.id.tViewId);
 		tView.setMovementMethod(new ScrollingMovementMethod());
 		com.estimote.sdk.utils.L.enableDebugLogging(true);
-		beaconManager = new BeaconManager(this);
+		/*beaconManager = new BeaconManager(this);
 		// Default values are 5s of scanning and 25s of waiting time to save CPU
 		// cycles.
 		// In order for this demo to be more responsive and immediate we lower
@@ -93,15 +93,16 @@ public class MainActivity extends Activity {
 					}
 				}
 			}
-		});
-		
+		});*/
+		startService(new Intent(this, MessageReceivingService.class));
+		startService(new Intent(this, BeaconScanService.class));
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
 		// Should be invoked in #onStart.
-		beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+		/*beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
 			@Override
 			public void onServiceReady() {
 				try {
@@ -110,7 +111,7 @@ public class MainActivity extends Activity {
 					Log.e(TAG, "Cannot start ranging", e);
 				}
 			}
-		});
+		});*/
 		
 	}
 
@@ -118,7 +119,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		startService(new Intent(this, MessageReceivingService.class));
+		
 		inBackground = false;
 		savedValues = MessageReceivingService.savedValues;
 		int numOfMissedMessages = 0;
@@ -136,11 +137,11 @@ public class MainActivity extends Activity {
 	@Override
 	public void onStop() {
 		inBackground = true;
-		try {
+		/*try {
 			beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS);
 		} catch (RemoteException e) {
 			Log.e(TAG, "Cannot stop but it does not matter now", e);
-		}
+		}*/
 		super.onStop();
 	}
 
@@ -227,7 +228,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		// When no longer needed. Should be invoked in #onDestroy.
-		beaconManager.disconnect();
+		//beaconManager.disconnect();
 		super.onDestroy();
 	}
 }

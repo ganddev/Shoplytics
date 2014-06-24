@@ -97,7 +97,7 @@ public class Customer implements Parcelable{
 	}
 
 	public void writeToSharedPreferences(Context ctx) {
-		SharedPreferences.Editor edit = ctx.getSharedPreferences(ctx.getString(R.string.preferences),  Context.MODE_MULTI_PROCESS).edit();
+		SharedPreferences.Editor edit = ctx.getApplicationContext().getSharedPreferences(ctx.getString(R.string.preferences),  Context.MODE_MULTI_PROCESS).edit();
 		edit.putString("customer_id", this.customerUUID.toString());
 		edit.putString("token", this.token);
 		edit.commit();
@@ -105,7 +105,7 @@ public class Customer implements Parcelable{
 	
 	public static Customer readFromSharedPreferences(Context ctx)
 	{
-		SharedPreferences prefs = ctx.getSharedPreferences(ctx.getString(R.string.preferences), Context.MODE_MULTI_PROCESS);
+		SharedPreferences prefs = ctx.getApplicationContext().getSharedPreferences(ctx.getString(R.string.preferences), Context.MODE_MULTI_PROCESS);
 		Customer customer = new Customer();
 		customer.customerUUID = UUID.fromString(prefs.getString("customer_id", null));
 		customer.token = prefs.getString("token", null);

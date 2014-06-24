@@ -37,7 +37,8 @@
 
         <service
             android:name="com.estimote.sdk.service.BeaconService"
-            android:exported="false"/>
+            android:exported="false"
+            android:process=":my_process"/>
         <service
             android:name="de.bjoern.ahlfeld.shoplytics.services.MessageReceivingService"
             android:label="com.amazonaws.androidtest.MessageReceivingService">
@@ -51,7 +52,8 @@
 
         <service 
             android:name="de.bjoern.ahlfeld.shoplytics.services.BeaconScanService"
-            android:exported="false" />
+            android:exported="false" 
+            android:process=":my_process"/>
         <receiver
             android:name="de.bjoern.ahlfeld.shoplytics.receivers.ExternalReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >

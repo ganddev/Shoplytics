@@ -45,10 +45,10 @@ public class MessageReceivingService extends Service{
     public void onCreate(){
         super.onCreate();
         final String preferences = getString(R.string.preferences);
-        savedValues = getSharedPreferences(preferences, Context.MODE_MULTI_PROCESS);
+        savedValues = getApplicationContext().getSharedPreferences(preferences, Context.MODE_MULTI_PROCESS);
         // In later versions multi_process is no longer the default
         if(VERSION.SDK_INT >  9){
-            savedValues = getSharedPreferences(preferences, Context.MODE_MULTI_PROCESS);
+            savedValues = getApplicationContext().getSharedPreferences(preferences, Context.MODE_MULTI_PROCESS);
         }
         gcm = GoogleCloudMessaging.getInstance(getBaseContext());
         SharedPreferences savedValues = PreferenceManager.getDefaultSharedPreferences(this);
@@ -65,7 +65,7 @@ public class MessageReceivingService extends Service{
 
     public static void saveToLog(Bundle extras, Context context){
         SharedPreferences.Editor editor=savedValues.edit();
-        String numOfMissedMessages = context.getString(R.string.num_of_missed_messages);
+        String numOfMissedMessages = context.getApplicationContext().getString(R.string.num_of_missed_messages);
         int linesOfMessageCount = 0;
         for(String key : extras.keySet()){
             String line = String.format("%s=%s", key, extras.getString(key));

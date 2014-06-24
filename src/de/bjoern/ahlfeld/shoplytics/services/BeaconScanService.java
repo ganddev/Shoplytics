@@ -50,7 +50,7 @@ public class BeaconScanService extends Service {
 					if (Utils.proximityFromAccuracy(Utils.computeAccuracy(b))
 							.equals(Utils.Proximity.NEAR)) {
 						Log.d(TAG+"beacon-discovered", b.toString());
-						SharedPreferences prefs = getSharedPreferences(
+						SharedPreferences prefs = getApplicationContext().getSharedPreferences(
 								getString(R.string.preferences),
 								Context.MODE_MULTI_PROCESS);
 
